@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.services.config;
+package com.devsuperior.dscatalog.config;
 
 import com.devsuperior.dscatalog.components.JwtTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
