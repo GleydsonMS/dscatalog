@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.config;
+package com.devsuperior.dscatalog.services.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

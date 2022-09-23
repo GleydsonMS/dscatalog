@@ -66,11 +66,13 @@ public class ProductServiceTest {
         when(repository.findById(existingId)).thenReturn(Optional.of(product));
         when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
 
-        when(repository.getReferenceById(existingId)).thenReturn(product);
-        when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
+        when(repository.find(any(), any(), any())).thenReturn(page);
 
-        when(categoryRepository.getReferenceById(existingId)).thenReturn(category);
-        when(categoryRepository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
+        when(repository.getOne(existingId)).thenReturn(product);
+        when(repository.getOne(nonExistingId)).thenThrow(EntityNotFoundException.class);
+
+        when(categoryRepository.getOne(existingId)).thenReturn(category);
+        when(categoryRepository.getOne(nonExistingId)).thenThrow(EntityNotFoundException.class);
 
 
         doNothing().when(repository).deleteById(existingId);
@@ -121,10 +123,9 @@ public class ProductServiceTest {
 
         Pageable pageable = PageRequest.of(0, 10);
 
-        Page<ProductDTO> result = service.findAllPaged(pageable);
+        Page<ProductDTO> result = service.findAllPaged(0L, "", pageable);
 
         assertNotNull(result);
-        verify(repository, times(1)).findAll(pageable);
     }
 
     @Test
